@@ -1,5 +1,4 @@
-
-class Node:
+class LinkedList:
 
     def __init__(self, node_data=None, previous_node=None, next_node=None):
         self.node_data = node_data
@@ -7,7 +6,7 @@ class Node:
         self.next_node = next_node
 
     def __str__(self):
-        return f'{self.node_data}'
+        return str(self.node_data)
 
     def is_head(self):
         if self.previous_node is None:
