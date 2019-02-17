@@ -12,7 +12,9 @@ class Stack:
     # Make the return string pretty
     def __str__(self):
         walking_node = self.top
-        stack_string = str(walking_node) + ', '
+        stack_string = str(walking_node)
+        if self.size > 1:
+            stack_string += ', '
         while walking_node.previous_node:
             if walking_node.previous_node.previous_node:
                 stack_string += str(walking_node.previous_node) + ', '
@@ -36,8 +38,10 @@ class Stack:
     # remove the node from the top of the stack
     def pop(self):
         temp_node = self.top
-        self.top = temp_node.previous_node
+        if temp_node is not None:
+            self.top = temp_node.previous_node
         temp_node.previous_node = None
+        self.size -= 1
         return temp_node
 
     # if the stack is empty

@@ -30,6 +30,11 @@ class Queue:
     # to the end of the queue
     # increase the size of the queue
     def enqueue(self, new_node):
+        '''
+
+        :param new_node: Stephen
+        :return:
+        '''
         temp_node = LinkedList(new_node)
         if self.first is None:
             self.first = temp_node
@@ -44,14 +49,15 @@ class Queue:
     # remove the first node from the queue
     def dequeue(self):
         temp_node = self.first
-        self.first = temp_node.next_node
+        if temp_node is not None:
+            self.first = temp_node.next_node
         self.size -= 1
         return temp_node
 
     # if the queue is empty
     # return false
     def is_empty(self):
-        return self.first is None
+        return not self.first
 
     # return the size of the queue
     def size(self):

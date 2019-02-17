@@ -1,5 +1,7 @@
 from queue import Queue
-from stack.py import Stack
+from stack import Stack
+from myQueue import MyQueue
+from myStack import MyStack
 
 
 def test_stack():
@@ -18,7 +20,8 @@ def test_stack():
 
 
 def test_queue():
-    print('\nQueue:')
+    print('==============================')
+    print('Queue:')
     q = Queue()
 
     for i in range(1, 10):
@@ -35,8 +38,33 @@ def test_queue():
     print('size:', q.size)
 
 
+def test_mystack():
+    print('==============================')
+    print('My Stack:')
+    mystack = MyStack()
+
+    for x in range(1, 10):
+        mystack.push(x)
+
+    print(mystack)
+    print(mystack.pop())
+    print('\nPopped:')
+    print(mystack)
+
+
+def test_myqueue():
+    print('==============================')
+    print('MyQueue:')
+    myqueue = MyQueue()
+    myqueue.enqueue(1)
+    myqueue.enqueue(3)
+    myqueue.enqueue(3)
+    myqueue.dequeue()
+    print(myqueue)
+
+
 if __name__ == '__main__':
     test_stack()
     test_queue()
-
-
+    test_mystack()
+    test_myqueue()
