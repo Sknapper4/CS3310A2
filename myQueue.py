@@ -1,4 +1,4 @@
-from stack import Stack
+from first_stack import Stack
 
 
 class MyQueue:

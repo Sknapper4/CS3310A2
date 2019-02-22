@@ -1,0 +1,11 @@
+push, 20
+push, 12
+pop,
+push, "A"
+push, 20
+getMax,
+push, 20
+push, 'C'
+push, 98
+pop
+pop
