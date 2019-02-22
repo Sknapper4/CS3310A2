@@ -38,17 +38,16 @@ class MyStack:
             self.queue_one.enqueue(new_node)
             self.top = new_node
             self.max_stack.push(new_node)
-            self.size += 1
-            return
-        while self.queue_one.first:
-            moving_node = self.queue_one.dequeue()
-            self.queue_two.enqueue(moving_node.node_data)
-        self.queue_one.enqueue(new_node)
-        self.discover_if_new_max(new_node)
-        while self.queue_two.first:
-            moving_node = self.queue_two.dequeue()
-            self.queue_one.enqueue(moving_node.node_data)
-        self.top = self.queue_one.first
+        else:
+            while self.queue_one.first:
+                moving_node = self.queue_one.dequeue()
+                self.queue_two.enqueue(moving_node.node_data)
+            self.queue_one.enqueue(new_node)
+            self.discover_if_new_max(new_node)
+            while self.queue_two.first:
+                moving_node = self.queue_two.dequeue()
+                self.queue_one.enqueue(moving_node.node_data)
+            self.top = self.queue_one.first
         self.size += 1
 
     def pop(self):

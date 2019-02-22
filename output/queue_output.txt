@@ -1,3 +1,11 @@
 Queue: 
 
 Results from MyQueue implementation:
+
+Item 20 dequeued
+Item 30  dequeued
+Item "a" dequeued
+
+Time for executing the sequence of a total of 11 enqueue and dequeue operations: 0.0968 ms
+Average time for enqueue operation: 0.010 ms
+Average time for dequeue operations: 0.006 ms

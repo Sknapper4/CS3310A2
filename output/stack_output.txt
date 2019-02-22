@@ -2,9 +2,15 @@ Stack:
 
 Results from MyStack implementation:
 
+Can't pop from an empty stack
 Item 12 popped
 Max value 20
 Max value 98
 Item 98 popped
 Item 'C' popped
 Max value 20
+
+Time for executing all the 14 push, pop, and getMax operations in the sequence: 0.2377 ms
+Average time for push operations: 0.025 ms
+Average time for pop operations: 0.013 ms
+Average time for getMax operations: 0.003 ms

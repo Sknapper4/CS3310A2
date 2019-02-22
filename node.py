@@ -1,4 +1,4 @@
-class LinkedList:
+class Node:
 
     def __init__(self, node_data=None, previous_node=None, next_node=None):
         self.node_data = node_data

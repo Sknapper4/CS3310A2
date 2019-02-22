@@ -1,5 +1,3 @@
-from first_queue import Queue
-from first_stack import Stack
 from myQueue import MyQueue
 from myStack import MyStack
 import csv
@@ -8,7 +6,12 @@ import time
 
 def read_stack_input_file():
     mystack = MyStack()
-    action_count = 0
+    push_count = 0
+    pop_count = 0
+    max_count = 0
+    push_time = 0
+    pop_time = 0
+    max_time = 0
     output_file = open('output/stack_output.txt', 'w+')
     output_file.write("Stack: \n\nResults from MyStack implementation:\n\n")
     with open("input/stack_input.txt") as f:
@@ -18,32 +21,57 @@ def read_stack_input_file():
             if row[1]:
                 value = row[1]
             if action_word == 'Push':
+                start = time.time()
                 mystack.push(value)
+                push_time += time.time() - start
+                push_count += 1
             if action_word == 'Pop':
-                popped_value = mystack.pop()
-                if popped_value:
-                    output_string = 'Item' + str(popped_value) + ' popped\n'
-                    output_file.write(output_string)
+                start = time.time()
+                if mystack.top:
+                    total_time_string = 'Item' + str(mystack.pop()) + ' popped\n'
+                    output_file.write(total_time_string)
                 else:
                     output_file.write('Can\'t pop from an empty stack\n')
+                pop_time += time.time() - start
+                pop_count += 1
             if action_word == 'getMax':
+                start = time.time()
                 if mystack.get_max:
-                    output_string = 'Max value' + str(mystack.get_max) + '\n'
-                    output_file.write(output_string)
+                    total_time_string = 'Max value' + str(mystack.get_max) + '\n'
+                    output_file.write(total_time_string)
                 else:
-                    output_string = 'Max value is' + str(mystack.get_max) + 'as stack is empty\n'
-                    output_file.write(output_string)
-            action_count += 1
+                    total_time_string = 'Max value is' + str(mystack.get_max) + 'as stack is empty\n'
+                    output_file.write(total_time_string)
+                max_time += time.time() - start
+                max_count += 1
+    if push_count > 0:
+        average_push = find_average_time(push_time, push_count) * 1000
+    if pop_count > 0:
+        average_pop = find_average_time(pop_time, pop_count) * 1000
+    if max_count > 0:
+        average_max = find_average_time(max_time, max_count) * 1000
+    total_count = push_count + pop_count + max_count
+    total_time = push_time + pop_time + max_time
+    total_time_string = f'\nTime for executing all the %d push, pop, and getMax operations in the sequence: %.4f ms\n' \
+                        % (total_count, total_time * 1000)
+    output_file.write(total_time_string)
+    push_string = f'Average time for push operations: %.3f ms\n' % average_push
+    output_file.write(push_string)
+    pop_string = f'Average time for pop operations: %.3f ms\n' % average_pop
+    output_file.write(pop_string)
+    max_string = f'Average time for getMax operations: %.3f ms\n' % average_max
+    output_file.write(max_string)
     output_file.close()
-    print('My Stack: ', mystack)
-    print(action_count)
 
 
 def read_queue_input_file():
     myqueue = MyQueue()
-    action_count = 0
+    enqueue_count = 0
+    enqueue_time = 0
+    dequeue_count = 0
+    dequeue_time = 0
     output_file = open('output/queue_output.txt', 'w+')
-    output_file.write('Queue: \n\nResults from MyQueue implementation:\n')
+    output_file.write('Queue: \n\nResults from MyQueue implementation:\n\n')
     with open("input/queue_input.txt") as f:
         reader = csv.reader(f, delimiter=',')
         for row in reader:
@@ -51,85 +79,37 @@ def read_queue_input_file():
             if row[1]:
                 value = row[1]
             if action_word == 'Enqueue':
+                start = time.time()
                 myqueue.enqueue(value)
+                enqueue_count += 1
+                enqueue_time += time.time() - start
             if action_word == 'Dequeue':
-                myqueue.dequeue()
-            action_count += 1
+                start = time.time()
+                dequeued_value = myqueue.dequeue()
+                output_string = 'Item' + str(dequeued_value) + ' dequeued\n'
+                output_file.write(output_string)
+                dequeue_count += 1
+                dequeue_time += time.time() - start
+    if enqueue_count > 0:
+        average_enqueue = find_average_time(enqueue_time, enqueue_count) * 1000
+    if dequeue_count > 0:
+        average_dequeue = find_average_time(dequeue_time, dequeue_count) * 1000
+    total_count = enqueue_count + dequeue_count
+    total_time = enqueue_time + dequeue_time
+    total_time_string = f'\nTime for executing the sequence of a total of %d enqueue and dequeue operations: %.4f ms\n' \
+                        % (total_count, total_time * 1000)
+    output_file.write(total_time_string)
+    enqueue_string = f'Average time for enqueue operation: %.3f ms\n' % average_enqueue
+    output_file.write(enqueue_string)
+    dequeue_string = f'Average time for dequeue operations: %.3f ms\n' % average_dequeue
+    output_file.write(dequeue_string)
     output_file.close()
-    print('My Queue: ', myqueue)
 
 
-def test_stack():
-    print('Stack:')
-    s = Stack()
-
-    for i in range(0, 10):
-        s.push(i)
-
-    print(s)
-    print(s.size)
-    print('\nPop:')
-    s.pop()
-    print(s)
-    print(s.size)
-
-
-def test_queue():
-    print('==============================')
-    print('Queue:')
-    q = Queue()
-
-    for i in range(1, 10):
-        q.enqueue(i)
-
-    print(q)
-    print('First:', q.first)
-    print('Last:', q.last)
-    print('size:', q.size)
-    print('\nDequeue:')
-    q.dequeue()
-    print(q)
-    print('first:', q.first)
-    print('size:', q.size)
-
-
-def test_mystack():
-    print('==============================')
-    print('My Stack:')
-    mystack = MyStack()
-    for x in range(0, 10):
-        mystack.push(x)
-
-    mystack.push(98)
-    print(mystack.get_max)
-    print(mystack)
-    print(mystack.pop())
-    print('\nPopped:')
-    print(mystack)
-    print(mystack.get_max)
-
-
-def test_myqueue():
-    print('==============================')
-    print('MyQueue:')
-    myqueue = MyQueue()
-
-    for x in range(0, 10):
-        myqueue.enqueue(x)
-
-    print(myqueue)
-    myqueue.dequeue()
-    myqueue.dequeue()
-    myqueue.dequeue()
-    print(myqueue)
-    print(myqueue.first)
-    print(myqueue.last)
+def find_average_time(total_time, count):
+    return total_time/count
 
 
 if __name__ == '__main__':
     read_stack_input_file()
     read_queue_input_file()
-    # test_stack()
-    # test_queue()
-    # test_mystack()
-    # test_myqueue()

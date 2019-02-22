@@ -1,4 +1,4 @@
-from linkedList import LinkedList
+from node import Node
 
 
 class Stack:
@@ -25,7 +25,7 @@ class Stack:
 
     # add a new node to the top of the stack
     def push(self, new_node):
-        temp_node = LinkedList(new_node)
+        temp_node = Node(new_node)
         if self.is_empty():
             self.top = temp_node
         else:

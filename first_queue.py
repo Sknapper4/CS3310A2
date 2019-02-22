@@ -1,4 +1,4 @@
-from linkedList import LinkedList
+from node import Node
 
 
 class Queue:
@@ -31,10 +31,10 @@ class Queue:
             make the new nodes previous node the last node
             set the new node as the new last node
         increment the size
-        :param new_node: Stephen
+        :param new_node:
         :return:
         '''
-        temp_node = LinkedList(new_node)
+        temp_node = Node(new_node)
         if not self.first:
             self.first = temp_node
             self.last = temp_node
