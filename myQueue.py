@@ -11,7 +11,16 @@ class MyQueue:
         self.stack_two = Stack()
 
     def __str__(self):
-        return str(self.first)
+        my_queue_string = ''
+        while self.stack_one.top:
+            temp_node = self.stack_one.pop()
+
+            my_queue_string += str(temp_node) + ', '
+            self.stack_two.push(temp_node.node_data)
+        while self.stack_two.top:
+            temp_node = self.stack_two.pop()
+            self.stack_one.push(temp_node.node_data)
+        return my_queue_string
 
     def enqueue(self, new_node):
         if self.stack_one.size < 1:
@@ -20,25 +29,25 @@ class MyQueue:
             self.last = self.stack_one.top
             self.size += 1
             return
-        for x in range(self.stack_one.size):
+        while self.stack_one.top:
             moving_node = self.stack_one.pop()
             self.stack_two.push(moving_node)
         self.stack_one.push(new_node)
         self.last = new_node
-        for y in range(self.stack_two.size):
+        while self.stack_two.top:
             moving_node = self.stack_two.pop()
-            self.stack_one.push(moving_node)
+            self.stack_one.push(moving_node.node_data)
         self.first = self.stack_one.top
         self.size += 1
 
     def dequeue(self):
-        for x in range(self.stack_one.size):
+        dequeued_node = self.stack_one.pop()
+        while self.stack_one.top:
             moving_node = self.stack_one.pop()
             self.stack_two.push(moving_node)
-        dequeued_node = self.stack_two.pop()
         self.size -= 1
         self.last = self.stack_two.top
-        for x in range(self.stack_two.size):
+        while self.stack_two.top:
             moving_node = self.stack_two.pop()
             self.stack_one.push(moving_node)
         self.first = self.stack_one.top

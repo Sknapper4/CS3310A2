@@ -56,6 +56,7 @@ class MyStack:
         pop the first node into a variable
         use a temp node to set the new top of the stack
             and then push that node back to the stack
+        pop the max_stack twice to remove the double push
         decrement size at the end
         :return: the popped node
         '''
@@ -63,6 +64,8 @@ class MyStack:
         temp_node = self.queue_one.dequeue()
         self.top = temp_node
         self.push(temp_node.node_data)
+        self.max_stack.pop()
+        self.max_stack.pop()
         self.size -= 1
         return pop_node
 

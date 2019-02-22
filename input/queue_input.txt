@@ -1,13 +1,11 @@
-findMax, 
-enqueue, 20 
-enqueue, 30 
-dequeue,
-enqueue, "a"
-enqueue, "c"
-enqueue, "eh"
-dequeue, 
-dequeue,
-findMax
-enqueue, "Stephen"
-enqueue, "Was"
-enqueue, "Here"
+Enqueue, 20
+Enqueue, 30 
+Dequeue,
+Enqueue, "a"
+Enqueue, "c"
+Enqueue, "eh"
+Dequeue, 
+Dequeue,
+Enqueue, "Stephen"
+Enqueue, "Was"
+Enqueue, "Here"

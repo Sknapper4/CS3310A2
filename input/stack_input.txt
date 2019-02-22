@@ -1,11 +1,13 @@
-push, 20
-push, 12
-pop,
-push, "A"
-push, 20
+Push, 20
+Push, 12
+Pop,
+Push, "A"
+Push, 20
 getMax,
-push, 20
-push, 'C'
-push, 98
-pop
-pop
+Push, 20
+Push, 'C'
+Push, 98
+getMax,
+Pop,
+Pop,
+getMax,

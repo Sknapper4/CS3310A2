@@ -1,0 +1,10 @@
+Stack: 
+
+Results from MyStack implementation:
+
+Item 12 popped
+Max value 20
+Max value 98
+Item 98 popped
+Item 'C' popped
+Max value 20

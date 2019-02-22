@@ -28,17 +28,16 @@ class Stack:
         temp_node = LinkedList(new_node)
         if self.is_empty():
             self.top = temp_node
-            self.size += 1
-            return
-        self.top.next_node = temp_node
-        temp_node.previous_node = self.top
-        self.top = temp_node
+        else:
+            self.top.next_node = temp_node
+            temp_node.previous_node = self.top
+            self.top = temp_node
         self.size += 1
 
     # remove the node from the top of the stack
     def pop(self):
         temp_node = self.top
-        if temp_node is not None:
+        if temp_node:
             self.top = temp_node.previous_node
         temp_node.previous_node = None
         self.size -= 1
